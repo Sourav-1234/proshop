@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import {notFound ,errorHandler} from './middleware/errorMiddleware.js';
 ///very important
 dotenv.config();
@@ -19,6 +20,9 @@ app.use(express.urlencoded({extended:true}));
 // app.get('/',(req,res) =>{
 //     res.send('API is running...')
 // });
+
+
+app.use(CookieParser());
 
 app.get('/' ,(req,res) =>{
     res.send('API is running...');

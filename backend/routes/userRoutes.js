@@ -13,6 +13,8 @@ import {authUser,
     deleteUser,
     updateUser }  from '../controller/userController.js'
 
+
+    import {protect,admin} from '../middleware/authMiddleware'
 // router.get('/' ,asyncHandler(async(req,res) =>{
 //     const products =await Product.find({});
 //     res.json(products);
