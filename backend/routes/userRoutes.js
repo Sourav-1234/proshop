@@ -14,7 +14,7 @@ import {authUser,
     updateUser }  from '../controller/userController.js'
 
 
-    import {protect,admin} from '../middleware/authMiddleware'
+import {protect,admin} from '../middleware/authMiddleware'
 // router.get('/' ,asyncHandler(async(req,res) =>{
 //     const products =await Product.find({});
 //     res.json(products);
@@ -38,7 +38,7 @@ import {authUser,
 
 router.route('/').post(registerUser).get(getUsers);
 router.post('/logout',logoutUser);
-router.post('/login',authUser);
+router.post('/auth',authUser);
 router.route('/profile').get(getUserProfile).put(updateUserProfile);
 router.route('/:id').delete(deleteUser).get(getUserByID).put(updateUser);
 
