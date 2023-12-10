@@ -1,12 +1,11 @@
-import {useNavigate} from 'rect-router-dom';
-import {Badge,Navbar,Nav,Container,NavDropdown} from 'react-bootstrap';
-import {FaShoppingCart,FaUser} from 'react-icons/fa';
+import { Navbar, Nav, Container, NavDropdown, Badge } from 'react-bootstrap';
+import { FaShoppingCart, FaUser } from 'react-icons/fa';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import { logout } from '../slices/authSlice';
 import logo from '../assets/logo.png';
-import {LinkContainer}  from 'react-router-bootstrap';
-import { useSelector,useDispatch } from 'react-redux';
-import {useLogoutMutation} from '../slices/authSlice';
-import { setCredentials } from '../slices/authSlice';
-//import logo from '../assets/logo.png';
 
 
 const Header = ()=>{
@@ -26,20 +25,10 @@ const Header = ()=>{
       navigate('/login');
     }
     catch(error){
-         console.log(object);
+         console.log(error);
     }
   }
-
-
-
-
-
-  const logoutHandler=() =>{
-    console.log('logout')
-  }
-
-
-  console.log(cartItems);
+ console.log(cartItems);
     return (
         <header> 
          <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>

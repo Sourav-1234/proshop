@@ -1,4 +1,4 @@
-import {Container,Row,Col} from 'rect-bootstrap';
+import {Container,Row,Col} from 'react-bootstrap';
 
 
 const FormContainer =() =>{

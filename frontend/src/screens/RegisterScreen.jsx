@@ -1,12 +1,13 @@
 import {useState,useEffect} from 'react';
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import {Form,Button,Row,Col} from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
-import {useDispatch ,useLocation,useSelector,useNavigate} from 'react-redux';
+import {useLocation,useNavigate} from 'react-router-dom';
 import Loader  from '../components/Loader';
 import {useRegisterMutation} from '../slices/usersApiSlice';
 import {setCredentials} from '../slices/authSlice'
 import {toast} from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const RegisterScreen =()=>{
