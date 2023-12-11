@@ -1,39 +1,40 @@
-import {Jwt}  from "jsonwebtoken";
-import asyncHandler from './asyncHandler';
+import jwt from 'jsonwebtoken';
+import asyncHandler from './asyncHandler.js';
 import User from '../models/userModel.js';
 
-export const protect= asyncHandler(async (req,res,next)=>{
-    let token;
+// User must be authenticated
+const protect = asyncHandler(async (req, res, next) => {
+  let token;
 
-    token= req.cookies.jwt;
+  // Read JWT from the 'jwt' cookie
+  token = req.cookies.jwt;
 
-    if(token){
-        try{
-            const decoded=jwt.verify(token,process.env.JWT_SECRET);
-            await User.findByID(decoded.userId).select('-password');
-      
-        }catch(error){
-             console.log(error);
-             res.status(401);
-             throw new Error('Not authorized, token failed');
-        }
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      req.user = await User.findById(decoded.userId).select('-password');
+
+      next();
+    } catch (error) {
+      console.error(error);
+      res.status(401);
+      throw new Error('Not authorized, token failed');
     }
-    else{
-        res.status(401);
-        throw new Error('Not authorized, no token');
-    }
-
+  } else {
+    res.status(401);
+    throw new Error('Not authorized, no token');
+  }
 });
 
-
-const admin= (req,res,next) =>{
-  if(req.user && req.user.isAdmin){
+// User must be an admin
+const admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
     next();
-  }
-  else{
+  } else {
     res.status(401);
-    throw new Error('Not authorized, as admin');
+    throw new Error('Not authorized as an admin');
   }
 };
 
-export {protect,admin};
+export { protect, admin };
