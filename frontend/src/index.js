@@ -28,8 +28,8 @@ createRoutesFromElements(
    <Route  path="/product/:id" element={<ProductScreen/>} />
    <Route path='/cart' element={<CartScreen/>} />
    <Route path='/login' element={<LoginScreen/>} />
-   <Route path='register' element={<RegisterScreen/>} />
-   
+   <Route path='/register' element={<RegisterScreen/>} />
+
    </Route>
 )
 )
