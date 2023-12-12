@@ -66,10 +66,10 @@ const RegisterScreen =()=>{
       <Form.Group controlId='name' className="my-3">
       <Form.Label>Name </Form.Label>
        <Form.Control 
-        type='text'
+        type='name'
         placeholder="Enter name"
         value={name}
-        onChange={(e) =>setEmail(e.target.value)}>
+        onChange={(e) =>setName(e.target.value)}>
        </Form.Control>
 </Form.Group>
 
@@ -80,7 +80,7 @@ const RegisterScreen =()=>{
         type='email'
         placeholder='Enter email'
         value={email}
-        onChange={(e) =>setConfirmPassword(e.target.value)}>
+        onChange={(e) =>setEmail(e.target.value)}>
         </Form.Control>
       </Form.Group>
 
@@ -88,11 +88,19 @@ const RegisterScreen =()=>{
       <Form.Label>Password Address</Form.Label>
        <Form.Control 
         type='password'
-        placeholder="Enter email"
+        placeholder="Enter password"
         value={password}
         onChange={(e) =>setPassword(e.target.value)}></Form.Control>
       </Form.Group>
-
+      <Form.Group className='my-2' controlId='confirmPassword'>
+      <Form.Label>Confirm Password</Form.Label>
+      <Form.Control
+        type='password'
+        placeholder='Confirm password'
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+      ></Form.Control>
+    </Form.Group>
 
    <Button type='submit' variant='primary' className="mt-2" 
    disabled ={isLoading} >
@@ -111,9 +119,9 @@ const RegisterScreen =()=>{
    </Col>
    </Row>
      </FormContainer>
-    )
+    );
 
 
-}
+};
 
 export default RegisterScreen;

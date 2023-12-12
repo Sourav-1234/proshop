@@ -62,7 +62,7 @@ const Header = ()=>{
            Logout
            </NavDropdown.Item>
           </NavDropdown>) :( <LinkContainer to="/login">
-          <Nav.Link href='login'><FaUser />Sign In</Nav.Link>
+          <Nav.Link href='/login'><FaUser />Sign In</Nav.Link>
           </LinkContainer>)}
          
            </Nav>
