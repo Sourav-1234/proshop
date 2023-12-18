@@ -28,11 +28,18 @@ export const usersApiSlice =apiSlice.injectEndpoints({
         }),
 
     }),
-   
+   profile:builder.mutation({
+    query:(data) =>({
+        url:`${USERS_URL}/profile`,
+        method:'PUT',
+        body:data,
+    }),
+   }),
 } ),
 });
 
 //export const {setCredentials} =authSlice.actions;
 
 export const { useLoginMutation,useLogoutMutation,
-useRegisterMutation} =usersApiSlice;
+useRegisterMutation,
+useProfileMutation} =usersApiSlice;
