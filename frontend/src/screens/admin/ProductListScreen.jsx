@@ -3,15 +3,44 @@ import { Table, Button,Row,Col } from 'react-bootstrap';
 import { FaTimes,FaEdit,FaTrash } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import { useGetProductsQuery } from '../../slices/productsApiSlice';
-
+import { useGetProductsQuery,useCreateProductMutation,useDeleteProductMutation} from '../../slices/productsApiSlice';
+import {toast} from 'react-toastify';
 
 
 
 const ProductListScreen =() =>{
     const {data :products,isLoading ,error}=useGetProductsQuery();
 
+
+   const [createProduct,{isLoading:loadingCreate}]=useCreateProductMutation();
+   
+   const [deleteProduct,{isLoading:loadingDelete}]=useDeleteProductMutation();
+
+  const deleteHandler=async (id) =>{
+   if(window.conmfirm('re you sure ?')){
+    try{
+      await deleteProduct(id);
+      refetch();
+    }catch(err){
+        toast.error(err?.data?.message || err.error);
+
+    }
+   }
+  }
+
     console.log(products);
+
+    const createProductHandler= async(id) =>{
+     if(window.confirm('Are you sure you want to create a new product?')){
+       try{
+        await deleteProduct(id);
+        toast.success('Product deleted');
+        refetch();
+       }catch(err){
+        toast.error(err?.data?.message || err.error);
+       }
+     }
+    }
 
     return (<>
     <Row className="align-items-center">
@@ -19,13 +48,18 @@ const ProductListScreen =() =>{
     <h1>Product</h1>
     </Col>
     <Col className="text-end">
-    <Button className="btn-sm m-3">
+    <Button className="btn-sm m-3" onClick={ createProductHandler }>
      <FaEdit /> Create Product
     </Button>
 
     </Col>
     
     </Row>
+
+    {loadingCreate && <Loader />}
+    {loadingDelete && <Loader />}
+
+
     {isLoading ? <Loader /> :error ? <Message variant ='danger'>
     {error}</Message>:(
       <>
@@ -55,11 +89,23 @@ const ProductListScreen =() =>{
              <td>{product.price}</td>
              <td>{product.category}</td>
              <td>{product.brand}</td>
-             
+             <td>
+              <LinkContainer to={`/admin/products/${product._id}/edit`} >
+              <Button variant='light' className='btn-sm mx-2'>
+                <FaEdit />
+              </Button>
+              
+              </LinkContainer>
+
+              <Button variant='danger' className='btn-sm' onClick={ ()=>deleteHandler(product._id)}>
+               <FaTrash/>
+              </Button>
              
              </td>
+             
+          
             </tr>
-    )}
+    ))}
          </tbody>
       </Table>
        

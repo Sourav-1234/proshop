@@ -4,7 +4,11 @@ const router =express.Router();
 // import Product from '../models/productModel.js';
 // import asyncHandler from '../middleware/asyncHandler.js';
 
-import {getProducts, getProductById }  from '../controller/productController.js'
+
+
+import {getProducts,getProductsById,createProduct,
+updateProduct,deleteProduct} from '../controller/productController.js';
+import {protect,admin} from '../middleware/authMiddleware.js';
 
 // router.get('/' ,asyncHandler(async(req,res) =>{
 //     const products =await Product.find({});
@@ -27,7 +31,7 @@ import {getProducts, getProductById }  from '../controller/productController.js'
    
 // }));
 
-router.route('/').get(getProducts);
-router.route('/:id').get(getProductById);
+router.route('/').get(getProducts).post(protect,admin,createProduct);
+router.route('/:id').get(getProductsById).put(protect,admin,updateProduct).delete(protect,admin,deleteProduct);
 
 export default router;
