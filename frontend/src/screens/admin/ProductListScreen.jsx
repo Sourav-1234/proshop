@@ -17,7 +17,7 @@ const ProductListScreen =() =>{
    const [deleteProduct,{isLoading:loadingDelete}]=useDeleteProductMutation();
 
   const deleteHandler=async (id) =>{
-   if(window.conmfirm('re you sure ?')){
+   if(window.confirm('Are you sure ?')){
     try{
       await deleteProduct(id);
       refetch();
