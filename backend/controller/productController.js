@@ -19,12 +19,12 @@ const getProducts =asyncHandler(async(req,res) =>{
 });
 
 
-const updateProduct =asyncHandler(async (req,res) =>{
+const updatedProduct =asyncHandler(async (req,res) =>{
     const {name,price,description,image,brand,category,countInStock }=req.body;
 
     
     
-    const product=await Product.findById({req.params.id});
+    const product=await Product.findById(req.params.id);
 
     if(product){
         product.name=name,
@@ -87,7 +87,7 @@ const createProduct =asyncHandler(async(req,res) =>{
 
 
 const deleteProduct =asyncHandler(async (req,res) =>{
-   const product=await Product.findById({req.params.id});
+   const product=await Product.findById(req.params.id);
 
     if(product){
        await Product.deleteOne({ _id:product._id });
@@ -149,6 +149,6 @@ const createdProductReview =asyncHandler (async (req, res) => {
 
 
 
-export {getProducts, getProductById,createProduct,updatedProduct,deleteProduct
+export { getProducts, getProductById,createProduct,updatedProduct,deleteProduct
 ,createdProductReview,getTopProducts,
 };

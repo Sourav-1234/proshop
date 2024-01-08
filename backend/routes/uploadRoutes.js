@@ -1,7 +1,8 @@
 import path from 'path';
 import express from 'express';
-import mutler from 'mutler';
+import multer from 'multer';
 const router =express.Router();
+
 
 
 const storage=multer.diskStorage({
@@ -35,7 +36,7 @@ function checkFileType (file ,cb){
 }
 
 
-const upload = mutler({
+const upload = multer({
     storage,
 
 });
